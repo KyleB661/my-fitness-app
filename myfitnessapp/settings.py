@@ -55,7 +55,7 @@ ROOT_URLCONF = 'myfitnessapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'main_app' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'myfitnessapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'fitness_app',
+        'USER': 'fitness_user',
+        'PASSWORD': 'fitness123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

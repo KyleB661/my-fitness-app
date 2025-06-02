@@ -1,0 +1,32 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}Workouts - Fitness App{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">My Workouts</h1>
+    
+    {% if workouts %}
+        <div class="row">
+            {% for workout in workouts %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ workout.name }}</h5>
+                            <p class="card-text">
+                                <strong>Date:</strong> {{ workout.date }}<br>
+                                <strong>Duration:</strong> {{ workout.duration }} minutes
+                            </p>
+                            <a href="{% url 'workout_detail' workout.id %}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No workouts found. <a href="{% url 'workout_create' %}" class="alert-link">Create your first workout</a>!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

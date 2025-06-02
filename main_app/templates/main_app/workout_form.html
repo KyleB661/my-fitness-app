@@ -1,0 +1,43 @@
+{% extends 'main_app/base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{{ action }} Workout</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="error">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.date.label_tag }}
+            {{ form.date }}
+            {% if form.date.errors %}
+                <div class="error">{{ form.date.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.duration.label_tag }}
+            {{ form.duration }}
+            {% if form.duration.errors %}
+                <div class="error">{{ form.duration.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.notes.label_tag }}
+            {{ form.notes }}
+            {% if form.notes.errors %}
+                <div class="error">{{ form.notes.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="submit-button">{{ action }} Workout</button>
+    </form>
+</div>
+{% endblock %}
