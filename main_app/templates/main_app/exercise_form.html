@@ -1,0 +1,30 @@
+{% extends 'main_app/base.html' %}
+
+{% block title %}Add Exercise{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add Exercise to {{ workout.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label>Name:</label>
+            {{ form.name }}
+        </p>
+        <p>
+            <label>Sets:</label>
+            {{ form.sets }}
+        </p>
+        <p>
+            <label>Reps:</label>
+            {{ form.reps }}
+        </p>
+        <p>
+            <label>Weight (kg):</label>
+            {{ form.weight }}
+        </p>
+        <button type="submit">Add Exercise</button>
+        <a href="{% url 'workout_detail' workout.id %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

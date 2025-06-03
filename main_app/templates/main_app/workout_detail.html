@@ -11,6 +11,15 @@
                 <strong>Date:</strong> {{ workout.date }}<br>
                 <strong>Duration:</strong> {{ workout.duration }} minutes
             </p>
+            {% if workout.notes %}
+                <div class="mt-3">
+                    <h4>Notes:</h4>
+                    <p>{{ workout.notes }}</p>
+                </div>
+            {% endif %}
+            <div class="mt-3">
+                <h4>Notes:</h4>
+                <p>{{ workout.notes|default:"No notes added." }}</p>    
         </div>
     </div>
 
@@ -32,6 +41,7 @@
                                 <th>Reps</th>
                                 <th>Weight</th>
                                 <th>Notes</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +52,13 @@
                                     <td>{{ exercise.reps }}</td>
                                     <td>{{ exercise.weight }} kg</td>
                                     <td>{{ exercise.notes|default:"-" }}</td>
+                                    <td>
+                                        <a href="{% url 'exercise_update' workout.id exercise.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                        <form method="post" action="{% url 'exercise_delete' workout.id exercise.id %}" style="display:inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

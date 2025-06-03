@@ -61,3 +61,30 @@ def exercise_create(request, workout_id):
         'workout': workout,
         'action': 'Add'
     })
+
+def exercise_update(request, workout_id, exercise_id):
+    workout = get_object_or_404(Workout, id=workout_id)
+    exercise = get_object_or_404(Exercise, id=exercise_id, workout=workout)
+    if request.method == 'POST':
+        form = ExerciseForm(request.POST, instance=exercise)
+        if form.is_valid():
+            form.save()
+            return redirect('workout_detail', workout_id=workout.id)
+    else:
+        form = ExerciseForm(instance=exercise)
+    return render(request, 'main_app/exercise_form.html', {
+        'form': form,
+        'workout': workout,
+        'action': 'Edit'
+    })
+
+def exercise_delete(request, workout_id, exercise_id):
+    workout = get_object_or_404(Workout, id=workout_id)
+    exercise = get_object_or_404(Exercise, id=exercise_id, workout=workout)
+    if request.method == 'POST':
+        exercise.delete()
+        return redirect('workout_detail', workout_id=workout.id)
+    return render(request, 'main_app/exercise_confirm_delete.html', {
+        'exercise': exercise,
+        'workout': workout
+    })

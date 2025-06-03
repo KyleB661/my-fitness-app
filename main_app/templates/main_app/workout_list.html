@@ -17,6 +17,12 @@
                                 <strong>Date:</strong> {{ workout.date }}<br>
                                 <strong>Duration:</strong> {{ workout.duration }} minutes
                             </p>
+                            {% if workout.notes %}
+                                <div class="mt-3">
+                                    <h4>Notes:</h4>
+                                        <p>{{ workout.notes }}</p>
+                                </div>
+                            {% endif %}
                             <a href="{% url 'workout_detail' workout.id %}" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
