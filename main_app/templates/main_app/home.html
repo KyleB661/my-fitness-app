@@ -1,22 +1,28 @@
 {% extends 'main_app/base.html' %}
 
-{% block title %}Home - Fitness App{% endblock %}
-
 {% block content %}
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title text-center mb-4">Welcome to My Fitness App</h1>
-                <p class="card-text text-center">
-                    Track your workouts, manage your exercises, and achieve your fitness goals!
-                </p>
-                <div class="text-center mt-4">
-                    <a href="{% url 'workout_list' %}" class="btn btn-primary me-2">View Workouts</a>
-                    <a href="{% url 'workout_create' %}" class="btn btn-secondary">Create Workout</a>
+<div class="container text-center mt-5">
+    <h1 class="display-4 mb-4">Welcome to My Fitness App</h1>
+    <p class="lead mb-5">Track your workouts, manage your exercises, and achieve your fitness goals!</p>
+
+    {% if user.is_authenticated %}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="d-grid gap-5">
+                    <a href="{% url 'workout_list' %}" class="btn btn-primary btn-lg">View Workouts</a>
+                    <a href="{% url 'workout_create' %}" class="btn btn-success btn-lg">Create Workout</a>
                 </div>
             </div>
         </div>
-    </div>
+    {% else %}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="d-grid gap-5">
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+                    <a href="{% url 'signup' %}" class="btn btn-success btn-lg">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
