@@ -76,24 +76,23 @@ WSGI_APPLICATION = 'myfitnessapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-if DEBUG:
-    # Local development database
+if 'RENDER' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True
+        )
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'fitness_app',
         }
     }
-else:
-    # Production database from environment variable provided by Render
-    DATABASES = {
-        'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'postgres://user:password@localhost:5432/fitness_app'),
-        conn_max_age=600
-    )
-    }
-
-
+    
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
