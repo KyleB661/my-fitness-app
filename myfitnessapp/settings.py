@@ -88,9 +88,9 @@ else:
     # Production database from environment variable provided by Render
     DATABASES = {
         'default': dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
+        default=os.environ.get('DATABASE_URL', 'postgres://user:password@localhost:5432/fitness_app'),
+        conn_max_age=600
+    )
     }
 
 
